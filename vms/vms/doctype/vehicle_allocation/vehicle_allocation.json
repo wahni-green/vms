@@ -1,0 +1,158 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-08-28 18:40:21.996640",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ivxe",
+  "naming_series",
+  "vehicle",
+  "driver",
+  "column_break_qglz",
+  "company",
+  "allocation_date",
+  "delivery_date",
+  "amended_from",
+  "section_break_dzbk",
+  "qty_capacity",
+  "weight_capacity",
+  "column_break_zsan",
+  "allocated_qty",
+  "allocated_weight",
+  "orders_tab",
+  "orders"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ivxe",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Vehicle Allocation",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "VA-.YYYY.-"
+  },
+  {
+   "fieldname": "column_break_qglz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "driver",
+   "fieldtype": "Link",
+   "label": "Driver",
+   "options": "Driver",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "allocation_date",
+   "fieldtype": "Date",
+   "label": "Allocation Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_date",
+   "fieldtype": "Date",
+   "label": "Delivery Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "orders",
+   "fieldtype": "Table",
+   "label": "Orders",
+   "options": "Vehicle Allocation Order"
+  },
+  {
+   "fieldname": "orders_tab",
+   "fieldtype": "Tab Break",
+   "label": "Orders"
+  },
+  {
+   "fieldname": "section_break_dzbk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "qty_capacity",
+   "fieldtype": "Float",
+   "label": "Qty Capacity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "weight_capacity",
+   "fieldtype": "Float",
+   "label": "Weight Capacity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_zsan",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "allocated_qty",
+   "fieldtype": "Float",
+   "label": "Allocated Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "allocated_weight",
+   "fieldtype": "Float",
+   "label": "Allocated Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-08-28 19:02:53.562558",
+ "modified_by": "Administrator",
+ "module": "VMS",
+ "name": "Vehicle Allocation",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
