@@ -7,7 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "sales_order",
-  "sales_order_item",
+  "sales_order_detail",
   "column_break_bizz",
   "customer",
   "item",
@@ -28,13 +28,6 @@
    "options": "Sales Order",
    "read_only": 1,
    "reqd": 1
-  },
-  {
-   "fieldname": "sales_order_item",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Sales Order Item",
-   "read_only": 1
   },
   {
    "fieldname": "column_break_bizz",
@@ -100,12 +93,19 @@
    "in_list_view": 1,
    "label": "Allocated Weight",
    "read_only": 1
+  },
+  {
+   "fieldname": "sales_order_detail",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Sales Order Item",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-28 18:53:00.579318",
+ "modified": "2024-08-29 15:53:58.649896",
  "modified_by": "Administrator",
  "module": "VMS",
  "name": "Vehicle Allocation Order",
