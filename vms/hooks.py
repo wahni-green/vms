@@ -12,7 +12,7 @@ app_license = "agpl-3.0"
 # include js, css files in header of desk.html
 # app_include_css = "/assets/vms/css/vms.css"
 app_include_js = [
-    "vms.bundle.js",
+	"vms.bundle.js",
 ]
 
 # include js, css files in header of web template
@@ -228,4 +228,3 @@ app_include_js = [
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-
