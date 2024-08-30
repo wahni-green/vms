@@ -10,10 +10,11 @@
   "naming_series",
   "vehicle",
   "driver",
+  "territories",
   "column_break_qglz",
-  "company",
   "allocation_date",
   "delivery_date",
+  "routes",
   "amended_from",
   "section_break_dzbk",
   "qty_capacity",
@@ -22,7 +23,8 @@
   "allocated_qty",
   "allocated_weight",
   "orders_tab",
-  "orders"
+  "orders",
+  "connections_tab"
  ],
  "fields": [
   {
@@ -81,6 +83,7 @@
    "fieldname": "orders",
    "fieldtype": "Table",
    "label": "Orders",
+   "no_copy": 1,
    "options": "Vehicle Allocation Order"
   },
   {
@@ -93,12 +96,14 @@
    "fieldtype": "Section Break"
   },
   {
+   "fetch_from": "vehicle.qty_capacity",
    "fieldname": "qty_capacity",
    "fieldtype": "Float",
    "label": "Qty Capacity",
    "read_only": 1
   },
   {
+   "fetch_from": "vehicle.weight_capacity",
    "fieldname": "weight_capacity",
    "fieldtype": "Float",
    "label": "Weight Capacity",
@@ -121,17 +126,34 @@
    "read_only": 1
   },
   {
-   "fieldname": "company",
-   "fieldtype": "Link",
-   "label": "Company",
-   "options": "Company",
-   "reqd": 1
+   "fieldname": "territories",
+   "fieldtype": "Table MultiSelect",
+   "label": "Territories",
+   "options": "Vehicle Allocation Territory"
+  },
+  {
+   "fieldname": "routes",
+   "fieldtype": "Table MultiSelect",
+   "label": "Routes",
+   "options": "Vehicle Allocation Route"
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections",
+   "show_dashboard": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2024-08-28 19:02:53.562558",
+ "links": [
+  {
+   "group": "Invoice",
+   "link_doctype": "Sales Invoice",
+   "link_fieldname": "vehicle_allocation"
+  }
+ ],
+ "modified": "2024-08-30 15:53:08.741113",
  "modified_by": "Administrator",
  "module": "VMS",
  "name": "Vehicle Allocation",
@@ -139,6 +161,8 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -146,7 +170,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "System Manager",
+   "role": "Stock User",
    "share": 1,
    "submit": 1,
    "write": 1

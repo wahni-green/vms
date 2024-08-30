@@ -25,6 +25,15 @@ vms.OrderSelector = class OrderSelector {
 	}
 
 	init() {
+		if (this.frm.is_dirty()) {
+			frappe.msgprint(__("Please save the document before adding items."));
+			return;
+		}
+		if (this.frm.doc.docstatus != 0) {
+			frappe.msgprint(__("Cannot add items to submitted/cancelled document."));
+			return;
+		}
+
 		this.allocated_order_items = {};
 		frappe.run_serially([() => this.setup_wrapper(), () => this.get_data()]);
 	}
@@ -134,10 +143,14 @@ vms.OrderSelector = class OrderSelector {
 			) {
 				this.allocated_order_items[selected_so][so_detail] = {
 					qty: Number(row.attr("data-qty")),
+					order_qty: Number(row.attr("data-order-qty")),
 					weight: Number(row.attr("data-weight")),
 					customer: row.attr("data-customer"),
 					item: row.attr("data-item"),
-					unit_weight: row.attr("data-unit-weight"),
+					route: row.attr("data-route"),
+					company: row.attr("data-company"),
+					sales_order: row.attr("data-so"),
+					sales_order_detail: row.attr("data-so-detail"),
 				};
 				this.set_selected_order_bg(selected_so, "lightblue");
 			} else {
@@ -218,7 +231,7 @@ vms.OrderSelector = class OrderSelector {
 
 	refresh_capacity() {
 		let allocated_qty = this.frm.doc.allocated_qty || 0;
-		let allocated_wt = this.frm.doc.weight_allocated || 0;
+		let allocated_wt = this.frm.doc.allocated_weight || 0;
 
 		for (const order in this.allocated_order_items) {
 			for (const item in this.allocated_order_items[order]) {
@@ -301,13 +314,12 @@ vms.OrderSelector = class OrderSelector {
 						row.customer = data.customer;
 						row.company = data.company;
 						row.item = data.item;
-						row.order_qty = data.qty;
+						row.order_qty = data.order_qty;
 						row.allocated_qty = data.qty;
 						row.pending_qty = data.qty;
-						row.unit_weight = flt(item.weight / item.qty, 2);
-						row.lot_qty = item.qty;
-						row.allocated_weight = item.weight;
-						row.route = item.route;
+						row.unit_weight = flt(data.weight / data.qty, 2);
+						row.allocated_weight = data.weight;
+						row.route = data.route || "";
 					}
 				}
 				me.frm.refresh_fields();
@@ -394,6 +406,7 @@ vms.OrderSelector = class OrderSelector {
                     data-item = "${result.item}"
                     data-weight = "${result.weight}"
                     data-rate = "${result.rate}"
+                    data-order-qty = "${result.order_qty}"
                     data-qty = "${result.qty}"
                     data-route = "${result.route}"
                     data-transaction-date = "${result.transaction_date}"
@@ -416,6 +429,7 @@ vms.OrderSelector = class OrderSelector {
 					checked_values["company"] = $(this).attr("data-company");
 					checked_values["item"] = $(this).attr("data-item");
 					checked_values["qty"] = Number($(this).attr("data-qty"));
+					checked_values["order_qty"] = Number($(this).attr("data-order-qty"));
 					checked_values["rate"] = Number($(this).attr("data-rate"));
 					checked_values["weight"] = Number($(this).attr("data-weight"));
 					checked_values["route"] = $(this).attr("data-route");
@@ -439,6 +453,7 @@ vms.OrderSelector = class OrderSelector {
 					checked_values["company"] = $(this).attr("data-company");
 					checked_values["item"] = $(this).attr("data-item");
 					checked_values["qty"] = Number($(this).attr("data-qty"));
+					checked_values["order_qty"] = Number($(this).attr("data-order-qty"));
 					checked_values["rate"] = Number($(this).attr("data-rate"));
 					checked_values["weight"] = Number($(this).attr("data-weight"));
 					checked_values["route"] = $(this).attr("data-route");
