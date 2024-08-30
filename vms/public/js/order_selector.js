@@ -325,6 +325,9 @@ vms.OrderSelector = class OrderSelector {
 				me.frm.refresh_fields();
 				me.frm.trigger("set_allocated");
 				me.dialog.hide();
+				me.frm.save().then(() => {
+					me.init();
+				});
 			} else {
 				frappe.msgprint(__("Please select order items."));
 			}
